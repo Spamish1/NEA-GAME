@@ -1,7 +1,7 @@
 import pygame 
-from setting import screen_height , screen_width , background_colour 
+from setting import screen_height , screen_width , background_colour , game_title 
 
-class game:
+class Game:
 
     def __init__(self):
         pygame.init()
@@ -14,12 +14,12 @@ class game:
         self.currentlevel = 1 
         self.currentwave = 1
 
-        #will probably need to add mroe later
+        #will probably need to add more later
 
 
     def run(self):
         while self.running:
-            self.handle_events()
+            pygame.handle_events()
             self.update()
             self.draw()
             self.clock.tick(60)
