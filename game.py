@@ -19,9 +19,24 @@ class Game:
 
     def run(self):
         while self.running:
-            pygame.handle_events()
+            self.handle_events()
             self.update()
             self.draw()
             self.clock.tick(60)
         self.quit()    
 
+def handle_events(self):
+    for event in pygame.event.get():
+        if event.type == pygame.quit:
+            self.running = False 
+        
+
+def update():
+    pass
+
+def draw(self):
+    self.screen.fill(background_colour)
+    pygame.display.flip()
+
+def quit():
+    pygame.quit
