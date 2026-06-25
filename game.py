@@ -1,9 +1,6 @@
 import pygame 
 from setting import screen_height , screen_width , background_colour , game_title 
 
-
-
-
 class Game:
 
     def __init__(self):
@@ -23,23 +20,23 @@ class Game:
     def run(self):
         while self.running:
             self.handle_events()
-            self.update()
             self.draw()
+            self.update()
             self.clock.tick(60)
-        self.quit()    
+        self.quitGame()    
 
     def handle_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.quit:
+            if event.type == pygame.QUIT:
                 self.running = False 
             
 
-    def update():
+    def update(self):
         pass
 
     def draw(self):
         self.screen.fill(background_colour)
         pygame.display.flip()
 
-    def quit():
-        pygame.quit
+    def quitGame(self):
+        pygame.quit()
