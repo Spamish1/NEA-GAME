@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-class game :
-    def__init__(self):
-     pygame.init()
-     self.screen = pygame.display.set_mode((screen_width, screen_height)) 
-     pygame
-=======
 import pygame 
 from setting import screen_height , screen_width , background_colour , game_title 
+
+
+
 
 class Game:
 
@@ -32,19 +28,18 @@ class Game:
             self.clock.tick(60)
         self.quit()    
 
-def handle_events(self):
-    for event in pygame.event.get():
-        if event.type == pygame.quit:
-            self.running = False 
-        
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.quit:
+                self.running = False 
+            
 
-def update():
-    pass
+    def update():
+        pass
 
-def draw(self):
-    self.screen.fill(background_colour)
-    pygame.display.flip()
+    def draw(self):
+        self.screen.fill(background_colour)
+        pygame.display.flip()
 
-def quit():
-    pygame.quit
->>>>>>> fa4233bc3453c856306dae7b6c419b204edbfb96
+    def quit():
+        pygame.quit
