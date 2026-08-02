@@ -1,10 +1,9 @@
-import pygame
-import sys
-from settings import screen_height , screen_width , background_colour , game_title , blue , white , light_blue , black
+import pygame 
+from setting import screen_height , screen_width , background_colour , game_title 
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, screen):
         pygame.init()
         self.screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption(game_title)
@@ -38,7 +37,7 @@ class Game:
         #will probably need to add more later
 
 
-    def run(self):
+    def run(self): #Gameloop
         while self.running:
             if self.game_state == "menu":
                 self.handle_menu()
@@ -54,7 +53,20 @@ class Game:
             self.draw()
             self.update()
             self.clock.tick(60)
-        self.quitGame()    
+        self.quitGame() 
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.Quit:
+                    pygame.QUIT()
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    button.checkForInput(pygame.mouse.get_pos())
+
+            screen.fill("white")## will probably need to change to draw later
+            button.update() 
+            button.changeColor(pygame.mouse.get_Pos())
+
+    pygame.display.update()       
 
     def handle_events(self):
         for event in pygame.event.get():
