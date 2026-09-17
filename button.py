@@ -1,7 +1,7 @@
 import pygame
 import sys
-from game  import Game 
-import setting
+#from game  import Game 
+import settings
 
 
 class Button():
@@ -32,24 +32,11 @@ class Button():
             self.text = self.screen.render(self.text_input ,True, "white") 
 
 
-button_surface = pygame.image.load("buton.png") ### nned to get an image from internet to act as my buttons for my menu 
+button_surface = pygame.image.load("Play button.png") ### nned to get an image from internet to act as my buttons for my menu 
 button_surface = pygame.transform.scale(button_surface, (0 , 0))  ### the zeros may need to be changed if i nned to scale the image size later
 
 button = Button(button_surface, 400, 300, "clicke me ")
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.Quit:
-            pygame.QUIT()
-            sys.exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            button.checkForInput(pygame.mouse.get_pos())
-
-    screen.fill("white")## will probably need to change to draw later
-    button.update() 
-    button.changeColor(pygame.mouse.get_Pos())
-
-    pygame.display.update()       
 
 
 

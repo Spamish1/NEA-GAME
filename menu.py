@@ -1,7 +1,7 @@
 import pygame 
 pygame.init()
+from settings import light_blue , white
 import settings
-
 
 def draw_menu(self,screen, background_colour):
     screen.fill(background_colour)
@@ -45,7 +45,7 @@ def handle_menu(self):
 
 def hover_buttons(rect, text):
     if rect.collidepoint(pygame.mouse.get_pos()):
-        color = lightblue
+        color = light_blue
     else:
         color = white
 
