@@ -4,8 +4,9 @@ import sys
 
 
 ###adding txt colour need to mention in dev log + font  
+small_fontsize = 30
 font_name = "Arial"
-font_size = 30
+font_size = 50
 colour_txt = (255, 255, 255) #white
 screen_width = 1840
 screen_height = 950
@@ -19,3 +20,5 @@ game_title = "Nea game : killer waves: return of the wave kiler volume 6 VII"
 
 background_colour = (30, 30, 30)
 
+
+ 
