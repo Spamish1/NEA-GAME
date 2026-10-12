@@ -21,10 +21,10 @@ class Game:
         self.score = 0
         self.currentlevel = 1  
         self.currentwave = 1
+        self.back_button = pygame.Rect(screen_width // 2 - 60, screen_height // 850, 400, 100) 
         self.Play_Game_button = pygame.Rect(screen_width // 2 - 200, screen_height // 3, 400, 100) 
         self.Quit_button = pygame.Rect(screen_width // 2 - 200, screen_height // 1.5, 400, 100)
         self.Controls_button = pygame.Rect(screen_width // 2 - 200, screen_height // 2, 400, 100)
-        
         #will probably need to add more later
 
 
@@ -58,7 +58,10 @@ class Game:
             if  event.type == pygame.MOUSEBUTTONDOWN and self.Controls_button.collidepoint(event.pos):  
                 print ("Controls and isntructions button pressed")
                 self.game_options_and_intructions = True
-                
+            if event.type == pygame.MOUSEBUTTONDOWN and self.back_button.collidepoint(event.pos):
+                print ("Back button pressed")
+                self.game_options_and_intructions = False
+                self.game_menu = True
                  
 
             #if event.type == pygame.MOUSEBUTTONDOWN: 
@@ -72,17 +75,21 @@ class Game:
             self.draw_text("Play Game", self.font, colour_txt, screen_width // 2 - 100, screen_height // 3)
             self.draw_text("Quit", self.font, colour_txt, screen_width // 2 - 45, screen_height // 1.5)
             self.draw_text("Controls and instructions", self.font, colour_txt, screen_width // 2 - 220, screen_height // 2)
-           
+            self.Quit_button = pygame.Rect(screen_width // 2 - 200, screen_height // 1.5, 400, 100)
+            self.Play_Game_button = pygame.Rect(screen_width // 2 - 200, screen_height // 3, 400, 100)
+            
         if self.game_options_and_intructions == True:
             self.game_menu = False
             self.screen.fill(background_colour)
+            self.draw_text("Back", self.font, colour_txt, screen_width // 2 - 60, screen_height // 850)
             self.draw_text("Welcome to the game!", self.font, colour_txt, screen_width // 2 - 220, screen_height // 5)
             self.draw_text("These are your controls : movement, W A S D  attack , left click on your mouse  ", self.small_fontsize, colour_txt, screen_width // 2 - 400, screen_height // 2.7)
-            self.draw_text("A brief description of the game: When you begin you will see a health bar and an equipped weapon,", self.small_fontsize, colour_txt, screen_width // 2 - 400, screen_height // 1.92 )
-            self.draw_text("you must use this weapon to defeat enemies , in doing so , you scroe will increase over time,  ", self.small_fontsize, colour_txt, screen_width // 2 - 400, screen_height // 1.80)
-            self.draw_text("do this to get to the next wave, once all waves are cleard, you can kill the boses unlocking a new level.  ", self.small_fontsize, colour_txt, screen_width // 2 - 400, screen_height // 1.7)
-            
-        pygame.display.flip()
+            self.draw_text("A brief description of the game: When you begin you will see a health bar and an equipped weapon,", self.small_fontsize, colour_txt, screen_width // 2 - 500, screen_height // 1.92 )
+            self.draw_text("you must use this weapon to defeat enemies , in doing so , you score will increase over time,  ", self.small_fontsize, colour_txt, screen_width // 2 - 500, screen_height // 1.80)
+            self.draw_text("do this to get to the next wave, once all waves are cleard, you can kill the boses unlocking a new level.  ", self.small_fontsize, colour_txt, screen_width // 2 - 500, screen_height // 1.7)
+            self.Quit_button = pygame.Rect(screen_width // 2 - 20000, screen_height // 10000.5, 400, 100)
+            self.Play_Game_button = pygame.Rect(screen_width // 2 - 20011, screen_height // 10000.5, 400, 100)
+        pygame.display.flip()    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
 
    
     def quitGame(self): 
