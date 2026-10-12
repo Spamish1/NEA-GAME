@@ -1,4 +1,12 @@
+import pygame 
+import sys 
 
+
+
+###adding txt colour need to mention in dev log + font  
+font_name = "Arial"
+font_size = 30
+colour_txt = (255, 255, 255) #white
 screen_width = 1840
 screen_height = 950
 black = (0,0,0)
