@@ -1,7 +1,7 @@
 import pygame 
 from settings import screen_height , screen_width , background_colour , game_title , colour_txt , font_name , font_size , small_fontsize
 import sys
-
+from map_parts import tile_info 
 
 
 
@@ -14,6 +14,7 @@ class Game:
         self.screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption(game_title)
         #REMEMER my game states will all be here remember for readability and scalability later  
+        self.lvl_1 = False 
         self.game_menu = False 
         self.game_options_and_intructions = False
         self.clock = pygame.time.Clock() 
@@ -27,8 +28,40 @@ class Game:
         self.Controls_button = pygame.Rect(screen_width // 2 - 200, screen_height // 2, 400, 100)
         #will probably need to add more later
 
+    def update_map(self,tile_map, tile_size, tile_info ):
+        for i in  range(len(tile_map)):
+            for j in range(len(tile_map[0])):
+                self.screen.blit(tile_info[self.tile_map_level_1[i][j]], (j * tile_size, i * tile_size))
 
-    
+    tile_map_level_1 = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],                 ### REMMBER TO SAY MAY  ADJUST THE SIZE OF THE TILE MAP LATER ON IF I WANT TO MAKE IT BIGGER OR SMALLER
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],                 ### REMMEBR TO SAY IN DEV LOG IF  I DO  THIS 
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],                     
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
+
+    tile_size = int(screen_width / len(tile_map_level_1[0]))   # vs code  gave me this  
+    for key in tile_info:
+        tile_info[key] = pygame.transform.scale(tile_info[key], (tile_size, tile_size))   # fits tile images ino the gard
+
+
+
     def run(self): #Gameloop###self.update was here but causes issues as there was no attribute update for game 
         while self.running:
             self.handle_events()
@@ -52,6 +85,9 @@ class Game:
                 self.running = False 
             if  event.type == pygame.MOUSEBUTTONDOWN and self.Play_Game_button.collidepoint(event.pos):  
                 print ("Play Game button pressed")
+                self.lvl_1 = True
+                self.game_menu = False
+                self.game_options_and_intructions == False
             if  event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos): 
                 print ("Quit button pressed")
                 self.running = False
@@ -89,6 +125,16 @@ class Game:
             self.draw_text("do this to get to the next wave, once all waves are cleard, you can kill the boses unlocking a new level.  ", self.small_fontsize, colour_txt, screen_width // 2 - 500, screen_height // 1.7)
             self.Quit_button = pygame.Rect(screen_width // 2 - 20000, screen_height // 10000.5, 400, 100)
             self.Play_Game_button = pygame.Rect(screen_width // 2 - 20011, screen_height // 10000.5, 400, 100)
+
+        if self.lvl_1 == True:
+            self.update_map(self.tile_map_level_1, self.tile_size, tile_info)
+            self.draw_text("Level:" + str(self.currentlevel), self.font, colour_txt, screen_width // 2 - 60, screen_height // 850)
+            self.draw_text("Wave:" + str(self.currentwave), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.5)
+            self.draw_text("Score: " + str(self.score), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.3)
+
+
+
+
         pygame.display.flip()    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
 
    
