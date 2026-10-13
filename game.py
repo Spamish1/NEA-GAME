@@ -28,10 +28,11 @@ class Game:
         self.Controls_button = pygame.Rect(screen_width // 2 - 200, screen_height // 2, 400, 100)
         #will probably need to add more later
 
-    def update_map(self,tile_map, tile_size, tile_info ):
-        for i in  range(len(tile_map)):
-            for j in range(len(tile_map[0])):
-                self.screen.blit(tile_info[self.tile_map_level_1[i][j]], (j * tile_size, i * tile_size))
+    def update_map(self,tile_map_level_1, tile_size, tile_info ):
+        for i in  range(len(tile_map_level_1)):
+            for j in range(len(tile_map_level_1[0])):
+                 self.screen.blit(tile_info[tile_map_level_1[i][j]], (j * tile_size, i * tile_size)) 
+
 
     tile_map_level_1 = [
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -57,6 +58,7 @@ class Game:
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
 
     tile_size = int(screen_width / len(tile_map_level_1[0]))   # vs code  gave me this  
+
     for key in tile_info:
         tile_info[key] = pygame.transform.scale(tile_info[key], (tile_size, tile_size))   # fits tile images ino the gard
 
@@ -87,7 +89,7 @@ class Game:
                 print ("Play Game button pressed")
                 self.lvl_1 = True
                 self.game_menu = False
-                self.game_options_and_intructions == False
+                self.game_options_and_intructions == False  
             if  event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos): 
                 print ("Quit button pressed")
                 self.running = False
@@ -98,7 +100,10 @@ class Game:
                 print ("Back button pressed")
                 self.game_options_and_intructions = False
                 self.game_menu = True
-                 
+            if self.lvl_1 == True and event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                self.lvl_1 = False
+                self.game_menu = True
+                self.game_options_and_intructions == False
 
             #if event.type == pygame.MOUSEBUTTONDOWN: 
                 #print ("Mouse button pressed at:", event.pos)
