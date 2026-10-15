@@ -125,4 +125,18 @@ class Game:
    
     def quitGame(self): 
         pygame.quit()
+
+
+
+
+class Player:
+    def __init__(self,health,movement,position,weapon) :
+        self.health = health    
+        self.speed = movement
+        self.player_position = position
+        self.current_weapon = weapon
+
+
+
         
+            
