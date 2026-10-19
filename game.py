@@ -36,8 +36,9 @@ class Game:
 
     
      
+     #tile_size = int((screen_width + 5) / (len(tile_map_level_1[0])-0.9))
 
-    tile_size = int(screen_width / len(tile_map_level_1[0]))   # vs code  gave me this   ## updated to /50 
+    tile_size = 57 ## move to  setiings so no ciruclar import from game to entitties 
 
     for key in tile_info:
         tile_info[key] = pygame.transform.scale(tile_info[key], (tile_size, tile_size))   # fits tile images ino the gard
@@ -65,28 +66,49 @@ class Game:
             self.game_menu = True
             if event.type == pygame.QUIT:
                 self.running = False 
-            if  event.type == pygame.MOUSEBUTTONDOWN and self.Play_Game_button.collidepoint(event.pos):  
+            elif  event.type == pygame.MOUSEBUTTONDOWN and self.Play_Game_button.collidepoint(event.pos):  
                 print ("Play Game button pressed")
                 self.lvl_1 = True
                 self.game_menu = False
                 self.game_options_and_intructions == False  
-            if  event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos): 
+            elif  event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos): 
                 print ("Quit button pressed")
                 self.running = False
-            if  event.type == pygame.MOUSEBUTTONDOWN and self.Controls_button.collidepoint(event.pos):  
+            elif  event.type == pygame.MOUSEBUTTONDOWN and self.Controls_button.collidepoint(event.pos):  
                 print ("Controls and isntructions button pressed")
                 self.game_options_and_intructions = True
-            if event.type == pygame.MOUSEBUTTONDOWN and self.back_button.collidepoint(event.pos):
+            elif event.type == pygame.MOUSEBUTTONDOWN and self.back_button.collidepoint(event.pos):
                 print ("Back button pressed")
                 self.game_options_and_intructions = False
                 self.game_menu = True
-            if self.lvl_1 == True and event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            elif self.lvl_1 == True and event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.lvl_1 = False
                 self.game_menu = True
-                self.game_options_and_intructions == False
+                self.game_options_and_intructions == False 
+                if self.lvl_1 == True and self.game_menu == False :
+                 if event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos):
+                  print ("Quit button pressed")
+                  self.running = True
+
+                
 
             #if event.type == pygame.MOUSEBUTTONDOWN: 
                 #print ("Mouse button pressed at:", event.pos)
+
+
+
+
+    def  get_screen_coordinates():
+        return(x-y,(x+y)/2)
+
+
+    def draw_entities(object,screen):
+        self.screen.blit(object.image, get_screen_coordinates()(object.rect.x,object.rect.y))
+
+
+
+
+
 
 
     ###REMEMBER WHENEVER I DRAW SOMETHIN ON SCREEN COME HERE AND ADD IT TO THE DRAW FUNCTION
@@ -122,7 +144,24 @@ class Game:
 
         pygame.display.flip()    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
 
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     def quitGame(self): 
         pygame.quit()
         

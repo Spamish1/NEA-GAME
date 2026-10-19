@@ -8,13 +8,13 @@ small_fontsize = 30
 font_name = "Arial"
 font_size = 50
 colour_txt = (255, 255, 255) #white
-screen_width = 1840
-screen_height = 950
+screen_width = 1824
+screen_height = 912
 black = (0,0,0)
 blue = (0, 0, 255)
 white = (255, 255, 255)
 light_blue = (0, 255, 255)
-
+tile_size = 57
 
 game_title = "Nea game : killer waves: return of the wave kiler volume 6 VII"
 
