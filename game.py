@@ -39,11 +39,16 @@ class Game:
 
     
     
+    def set_coordinates(self , upp ,down , left ,right):
+        self.player.player_ypos -= upp
+        self.player.player_ypos -= down 
+        self.player.player_xpos += right
+        self.player.player_xpos += left
 
 
    
 
-    def set_ypos(self , upp , down , left , right):
+    def set_pos(self , upp , down , left , right):
         self.player.rect.y -= upp 
         self.player.rect.y -= down
         self.player.rect.x += right
@@ -51,7 +56,7 @@ class Game:
     
     
     def getpos (self):
-            return(self.player.player_ypos)    
+            return(self.player.player_ypos, self.player.player_xpos )    
 
      
      #tile_size = int((screen_width + 5) / (len(tile_map_level_1[0])-0.9))
@@ -88,7 +93,7 @@ class Game:
                 print ("Play Game button pressed")
                 self.lvl_1 = True
                 self.game_menu = False
-                self.game_options_and_intructions == False  
+                self.game_options_and_intructions = False  
             elif  event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos): 
                 print ("Quit button pressed")
                 self.running = False
@@ -108,30 +113,29 @@ class Game:
                   print ("Quit button pressed")
                   self.running = True
 
+            key_pressed = pygame.key.get_pressed()
             if self.lvl_1 == True :
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_w :
+                if   key_pressed [pygame.K_w] :
                     print("w pressed ")
-                    self.set_ypos(5,0,0,0)
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_s :
+                    self.set_pos(5,0,0,0)
+                    self.set_coordinates(5,0,0,0)
+                if  key_pressed [pygame.K_s] :
                         print("s pressed ")
-                        self.set_ypos(0,-5,0,0)
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_d :
+                        self.set_pos(0,-5,0,0)
+                        self.set_coordinates(0,-5,0,0)
+                if  key_pressed [pygame.K_d] :
                     print("d pressed ")
-                    self.set_ypos(0,0,5,0)    
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_a :
+                    self.set_pos(0,0,5,0)  
+                    self.set_coordinates(0,0,5,0)  
+                if  key_pressed [pygame.K_a] :
                         print("a pressed ")
-                        self.set_ypos(0,0,0,-5)
+                        self.set_pos(0,0,0,-5)
+                        self.set_coordinates(0,0,0,-5)
                 print(self.getpos())
                  
 
             #if event.type == pygame.MOUSEBUTTONDOWN: 
                 #print ("Mouse button pressed at:", event.pos)
-
-
-
-
-    #def  get_screen_coordinates(self):
-     #   return(x-y,(x+y)/2)
 
 
     def draw_entities(self, object,x , y):
@@ -171,6 +175,8 @@ class Game:
             self.draw_text("Wave:" + str(self.currentwave), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.5)
             self.draw_text("Score: " + str(self.score), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.3)
             self.all_sprites.draw(self.screen)
+            self.Quit_button = pygame.Rect(screen_width // 2 - 20000, screen_height // 10000.5, 400, 100)
+            self.Play_Game_button = pygame.Rect(screen_width // 2 - 20011, screen_height // 10000.5, 400, 100)
 
 
 
