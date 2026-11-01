@@ -28,7 +28,11 @@ class Game:
         self.Controls_button = pygame.Rect(screen_width // 2 - 200, screen_height // 2, 400, 100)
         self.all_sprites = pygame.sprite.Group() ## stores all my sprits 
         self.player = Player(500, 500 , 30)
-        self.all_sprites.add(self.player)
+        self.all_sprites.add(self.player) ## adds the sprites to be drawn 
+        self.animation_time_passed = pygame.time.get_ticks() 
+        self.animation_frames = 0 
+       
+        ## moved self.current_frame = 3
         #will probably need to add more later
 
     def update_map(self,tile_map_level_1, tile_size, tile_info ):
@@ -37,12 +41,19 @@ class Game:
                  self.screen.blit(tile_info[tile_map_level_1[i][j]], (j * tile_size, i * tile_size)) 
 
 
-    
+    def set_frame(self , frame):
+        self.player.current_frame = frame
+        if self.player.current_frame == 0 :
+            return ( self.player.up1 )
+        elif self.player.current_frame == 1  :
+            return( self.player.up2)
+        #return self.player.image used to be here   
+
     
     def set_coordinates(self , upp ,down , left ,right):
         self.player.player_ypos -= upp
         self.player.player_ypos -= down 
-        self.player.player_xpos += right
+        self.player.player_xpos += right      
         self.player.player_xpos += left
 
 
@@ -68,7 +79,7 @@ class Game:
 
 
 
-    def run(self): #Gameloop###self.update was here but causes issues as there was no attribute update for game 
+    def run(self): #Gameloop     ###self.update was here but causes issues as there was no attribute update for game 
         while self.running:
             self.handle_events()
             self.draw()
@@ -94,7 +105,7 @@ class Game:
                 self.lvl_1 = True
                 self.game_menu = False
                 self.game_options_and_intructions = False  
-            elif  event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos): 
+            elif  event.type == pygame.MOUSEBUTTONDOWN and self.Quit_button.collidepoint(event.pos): 
                 print ("Quit button pressed")
                 self.running = False
             elif  event.type == pygame.MOUSEBUTTONDOWN and self.Controls_button.collidepoint(event.pos):  
@@ -113,24 +124,53 @@ class Game:
                   print ("Quit button pressed")
                   self.running = True
 
+            
+
             key_pressed = pygame.key.get_pressed()
             if self.lvl_1 == True :
-                if   key_pressed [pygame.K_w] :
+                if  key_pressed [pygame.K_w] :
                     print("w pressed ")
                     self.set_pos(5,0,0,0)
                     self.set_coordinates(5,0,0,0)
+                  
+                    if self.animation_time_passed - self.animation_frames >= 150 : 
+                        if self.player.current_frame == 0  :
+                            self.player.image = self.set_frame(1)
+                            self.animation_frames = self.animation_time_passed
+                        else: 
+                            self.palyer.image = self.set_frame(0)
+                            self.animation_frames = self.animation_time_passed        
+
+                       ## maybe reduce the amount of time passed
+
+                    
+                        
+
+                    self.player.image = pygame.transform.scale(self.player.image, (64,64))
+
                 if  key_pressed [pygame.K_s] :
-                        print("s pressed ")
-                        self.set_pos(0,-5,0,0)
-                        self.set_coordinates(0,-5,0,0)
+                    print("s pressed ")
+                    self.set_pos(0,-5,0,0)
+                    self.set_coordinates(0,-5,0,0)
+                    self.player.image = self.player.down1
+                    self.player.image = pygame.transform.scale(self.player.image, (64,64))
                 if  key_pressed [pygame.K_d] :
                     print("d pressed ")
-                    self.set_pos(0,0,5,0)  
+                    self.set_pos(0,0,5,0)             
                     self.set_coordinates(0,0,5,0)  
+                    self.player.image = self.player.right1
+                    self.player.image = pygame.transform.scale(self.player.image, (64,64))
                 if  key_pressed [pygame.K_a] :
-                        print("a pressed ")
-                        self.set_pos(0,0,0,-5)
-                        self.set_coordinates(0,0,0,-5)
+                    print("a pressed ")
+                    self.set_pos(0,0,0,-5)
+                    self.set_coordinates(0,0,0,-5)
+                    self.player.image = self.player.left1
+                    self.player.image = pygame.transform.scale(self.player.image, (64,64))
+            #y = 790 55 , x = 45 , 1710 for the boundarys or do the tile , perhaps with a get tile 
+                else: 
+                    self.player.image = self.player.image
+                    self.player.image = pygame.transform.scale(self.player.image, (64,64))  
+
                 print(self.getpos())
                  
 
@@ -177,25 +217,12 @@ class Game:
             self.all_sprites.draw(self.screen)
             self.Quit_button = pygame.Rect(screen_width // 2 - 20000, screen_height // 10000.5, 400, 100)
             self.Play_Game_button = pygame.Rect(screen_width // 2 - 20011, screen_height // 10000.5, 400, 100)
+            
+            
 
 
 
         pygame.display.flip()    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

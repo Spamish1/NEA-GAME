@@ -22,7 +22,7 @@ tile_map_level_1 = [
 ]
 
     
-
+## maybe use the one and 2 here for the boundaries and colisons 
 
 
 
