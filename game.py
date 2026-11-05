@@ -13,7 +13,7 @@ class Game:
         self.font = pygame.font.SysFont(font_name, font_size)
         self.screen = pygame.display.set_mode((screen_width, screen_height))
         pygame.display.set_caption(game_title)
-        #REMEMER my game states will all be here remember for readability and scalability later  
+        #REMEMbER my game states will all be here remember for readability and scalability later  
         self.lvl_1 = False ## test == False 
         self.game_menu = False 
         self.game_options_and_intructions = False
@@ -46,6 +46,22 @@ class Game:
         if self.player.current_frame == 0 :
             return ( self.player.up1 )
         elif self.player.current_frame == 1  :
+            return( self.player.up2)
+        elif self.player.current_frame == 2  :
+            return( self.player.down1)
+        elif self.player.current_frame == 3  :
+            return( self.player.down2)
+        elif self.player.current_frame == 4  :
+            return( self.player.right1)
+        elif self.player.current_frame == 5  :
+            return( self.player.right2)
+        elif self.player.current_frame == 6  :
+            return( self.player.left1)
+        elif self.player.current_frame == 7  :
+            return( self.player.left2)
+        elif self.player.current_frame == 8  :
+            return( self.player.up2)
+        elif self.player.current_frame == 9  :
             return( self.player.up2)
         #return self.player.image used to be here   
 
@@ -118,7 +134,7 @@ class Game:
             elif self.lvl_1 == True and event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.lvl_1 = False
                 self.game_menu = True
-                self.game_options_and_intructions == False 
+                self.game_options_and_intructions = False 
                 if self.lvl_1 == True and self.game_menu == False :
                  if event.type == pygame.MOUSEBUTTONDOWN and  self.Quit_button.collidepoint(event.pos):
                   print ("Quit button pressed")
@@ -132,40 +148,54 @@ class Game:
                     print("w pressed ")
                     self.set_pos(5,0,0,0)
                     self.set_coordinates(5,0,0,0)
-                  
                     if self.animation_time_passed - self.animation_frames >= 150 : 
                         if self.player.current_frame == 0  :
                             self.player.image = self.set_frame(1)
                             self.animation_frames = self.animation_time_passed
                         else: 
-                            self.palyer.image = self.set_frame(0)
-                            self.animation_frames = self.animation_time_passed        
-
-                       ## maybe reduce the amount of time passed
-
-                    
-                        
-
+                            self.player.image = self.set_frame(0)
+                            self.animation_frames = self.animation_time_passed                             
                     self.player.image = pygame.transform.scale(self.player.image, (64,64))
 
                 if  key_pressed [pygame.K_s] :
                     print("s pressed ")
                     self.set_pos(0,-5,0,0)
                     self.set_coordinates(0,-5,0,0)
-                    self.player.image = self.player.down1
+                    if self.animation_time_passed - self.animation_frames >= 150 : 
+                         if self.player.current_frame == 3  :
+                           self.player.image = self.set_frame(2)
+                           self.animation_frames = self.animation_time_passed
+                         else: 
+                           self.player.image = self.set_frame(3)
+                           self.animation_frames = self.animation_time_passed 
                     self.player.image = pygame.transform.scale(self.player.image, (64,64))
+
                 if  key_pressed [pygame.K_d] :
                     print("d pressed ")
                     self.set_pos(0,0,5,0)             
                     self.set_coordinates(0,0,5,0)  
-                    self.player.image = self.player.right1
+                    if self.animation_time_passed - self.animation_frames >= 150 : 
+                        if self.player.current_frame == 5  :
+                            self.player.image = self.set_frame(4)
+                            self.animation_frames = self.animation_time_passed
+                        else: 
+                            self.player.image = self.set_frame(5)
+                            self.animation_frames = self.animation_time_passed 
                     self.player.image = pygame.transform.scale(self.player.image, (64,64))
+
                 if  key_pressed [pygame.K_a] :
                     print("a pressed ")
                     self.set_pos(0,0,0,-5)
                     self.set_coordinates(0,0,0,-5)
-                    self.player.image = self.player.left1
+                    if self.animation_time_passed - self.animation_frames >= 150 : 
+                        if self.player.current_frame == 7  :
+                            self.player.image = self.set_frame(6)
+                            self.animation_frames = self.animation_time_passed
+                        else: 
+                            self.player.image = self.set_frame(7)
+                            self.animation_frames = self.animation_time_passed 
                     self.player.image = pygame.transform.scale(self.player.image, (64,64))
+
             #y = 790 55 , x = 45 , 1710 for the boundarys or do the tile , perhaps with a get tile 
                 else: 
                     self.player.image = self.player.image
@@ -210,6 +240,7 @@ class Game:
             self.Play_Game_button = pygame.Rect(screen_width // 2 - 20011, screen_height // 10000.5, 400, 100)
 
         if self.lvl_1 == True:
+            self.screen.fill(background_colour)
             self.update_map(tile_map_level_1, self.tile_size, tile_info)
             self.draw_text("Level:" + str(self.currentlevel), self.font, colour_txt, screen_width // 2 - 60, screen_height // 850)
             self.draw_text("Wave:" + str(self.currentwave), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.5)
@@ -220,9 +251,9 @@ class Game:
             
             
 
-
-
-        pygame.display.flip()    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
+        
+        self.animation_time_passed  = pygame.time.get_ticks()
+        pygame.display.flip()                                                    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
 
 
 
