@@ -1,4 +1,5 @@
 import pygame
+import entities 
 
 # will need to add more to dictionary 
 tile_info = {

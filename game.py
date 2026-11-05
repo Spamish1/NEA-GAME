@@ -3,6 +3,7 @@ from settings import screen_height , screen_width , background_colour , game_tit
 import sys
 from map_parts import tile_info 
 from maps import tile_map_level_1
+from entities import *
 
 
 class Game:
@@ -26,6 +27,9 @@ class Game:
         self.Play_Game_button = pygame.Rect(screen_width // 2 - 200, screen_height // 3, 400, 100) 
         self.Quit_button = pygame.Rect(screen_width // 2 - 200, screen_height // 1.5, 400, 100)
         self.Controls_button = pygame.Rect(screen_width // 2 - 200, screen_height // 2, 400, 100)
+        self.all_sprites = pygame.sprite.Group()
+        self.player1 = Player(500,500,30)
+        self.all_sprites.add(self.player1)
         #will probably need to add more later
 
     def update_map(self,tile_map_level_1, tile_size, tile_info ):
@@ -96,19 +100,31 @@ class Game:
                 #print ("Mouse button pressed at:", event.pos)
 
 
-
-
-    def  get_screen_coordinates():
-        return(x-y,(x+y)/2)
-
-
-    def draw_entities(object,screen):
-        self.screen.blit(object.image, get_screen_coordinates()(object.rect.x,object.rect.y))
+    
 
 
 
+    def draw_entities(self ,object ,x ,y):
+        self.screen.blit(object,self.player_image_forward, x, y )
 
+  #  def  get_screen_coordinates(self):
+   #         return(self.player_xposition-self.player_yposition,(self.player_xposition+self.player_yposition)/2)
 
+#class Player :
+ #   def __init__(self,y_pos, x_pos , max_health ):
+  #          self.xpos= x_pos
+   #         self.ypos = y_pos
+    #        self._max_health = max_health
+
+#class Player :
+    #def __init__(self,y_pos, x_pos , max_health ):
+       # self.player_yposition = y_pos
+        #self.player_xposition = x_pos 
+        #self.__player_maxhealth = max_health  ## player max health is private at this moment may not be in future 
+        #self.player_image_forward = pygame.image.load("player_images/up_frame_1.png") #  going t onned several for the plaeyr to turna round properly
+        #self.rect = self.player_image_forward.get_rect()                     ### might need to make this player_image_forward instead of image and make it so that all the animations have it like this s o that they all have hitboxes 
+        #self.rect.playerx_pos = ( 4 * tile_size).get_rect()
+        #self.rect.playery_pos = ( 4 * tile_size).get_rect() might need t ogetr id of this here witht the get recked
 
 
     ###REMEMBER WHENEVER I DRAW SOMETHIN ON SCREEN COME HERE AND ADD IT TO THE DRAW FUNCTION
@@ -138,6 +154,7 @@ class Game:
             self.draw_text("Level:" + str(self.currentlevel), self.font, colour_txt, screen_width // 2 - 60, screen_height // 850)
             self.draw_text("Wave:" + str(self.currentwave), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.5)
             self.draw_text("Score: " + str(self.score), self.font, colour_txt, screen_width // 2 - 100, screen_height // 1.3)
+            self.all_sprites.draw(self.screen)
 
 
 
@@ -145,7 +162,7 @@ class Game:
         pygame.display.flip()    ##remebr to leave outside of if  staments to avoid the wierd  flashing 
 
 
-
+   
 
 
 
@@ -168,12 +185,12 @@ class Game:
 
 
 
-class Player:
-    def __init__(self,health,movement,position,weapon) :
-        self.health = health    
-        self.speed = movement
-        self.player_position = position
-        self.current_weapon = weapon
+#class Player:
+    #def __init__(self,health,movement,position,weapon) :
+        #self.health = health    
+       # self.speed = movement
+       # self.player_position = position
+       # self.current_weapon = weapon
 
 
 
